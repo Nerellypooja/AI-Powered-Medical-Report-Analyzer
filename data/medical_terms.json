@@ -1,0 +1,37 @@
+{
+  "Hemoglobin": "A protein in red blood cells that carries oxygen throughout the body.",
+  "Total Leukocyte Count": "Measures white blood cells that help fight infections.",
+  "Neutrophils": "White blood cells that protect against bacterial infections.",
+  "Lymphocyte": "White blood cells involved in immunity and fighting viral infections.",
+  "Platelet Count": "Blood cells that help stop bleeding by forming clots.",
+  "MCV": "Shows the average size of red blood cells.",
+  "MCH": "Shows how much hemoglobin is present in each red blood cell.",
+  "MCHC": "Shows how concentrated hemoglobin is in red blood cells.",
+
+  "Fasting Blood Sugar": "Measures blood sugar after fasting to assess diabetes risk.",
+  "Post Prandial Blood Sugar": "Measures blood sugar after a meal.",
+  "HbA1c": "Shows average blood sugar levels over the past 2–3 months.",
+
+  "TSH": "A hormone that controls thyroid activity and metabolism.",
+  "T3": "A thyroid hormone that affects energy and metabolism.",
+  "T4": "A thyroid hormone that regulates body functions.",
+
+  "LH": "A hormone that helps regulate ovulation and the menstrual cycle.",
+  "FSH": "A hormone involved in egg development in the ovaries.",
+  "LH/FSH Ratio": "Shows the balance between LH and FSH hormones.",
+  "Prolactin": "A hormone that affects menstrual cycles and milk production.",
+  "Testosterone": "A hormone present in both genders; higher levels in women may affect ovulation.",
+
+  "Total Cholesterol": "Measures overall cholesterol levels in the blood.",
+  "LDL Cholesterol": "Often called bad cholesterol; high levels may increase heart risk.",
+  "HDL Cholesterol": "Often called good cholesterol; helps protect the heart.",
+  "Triglycerides": "A type of fat in the blood that stores excess energy.",
+
+  "SGOT": "An enzyme that helps assess liver health.",
+  "SGPT": "An enzyme that indicates liver cell injury.",
+  "Bilirubin": "A substance formed from red blood cell breakdown; high levels may cause jaundice.",
+  "ALP": "An enzyme related to liver and bone health.",
+
+  "Creatinine": "A waste product used to evaluate kidney function.",
+  "Urea": "A waste product that reflects kidney health."
+}

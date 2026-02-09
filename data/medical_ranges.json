@@ -1,0 +1,62 @@
+{
+  "Hemoglobin": {
+    "male": [13.0, 17.0],
+    "female": [12.0, 15.5],
+    "unit": "g/dL"
+  },
+  "Total Leukocyte Count": {
+    "all": [4000, 11000],
+    "unit": "cells/cumm"
+  },
+  "Neutrophils": {
+    "all": [40, 80],
+    "unit": "%"
+  },
+  "Lymphocyte": {
+    "all": [20, 40],
+    "unit": "%"
+  },
+  "Platelet Count": {
+    "all": [1.5, 4.1],
+    "unit": "lakhs/cumm"
+  },
+
+  "Fasting Blood Sugar": {
+    "all": [70, 99],
+    "unit": "mg/dL"
+  },
+  "Post Prandial Blood Sugar": {
+    "all": [70, 140],
+    "unit": "mg/dL"
+  },
+  "HbA1c": {
+    "all": [4.0, 5.6],
+    "unit": "%"
+  },
+
+  "TSH": {
+    "all": [0.4, 4.0],
+    "unit": "µIU/mL"
+  },
+  "T3": {
+    "all": [80, 200],
+    "unit": "ng/dL"
+  },
+  "T4": {
+    "all": [5.0, 12.0],
+    "unit": "µg/dL"
+  },
+
+  "LH": {
+    "female": [1.0, 20.0],
+    "unit": "mIU/mL"
+  },
+  "FSH": {
+    "female": [3.0, 10.0],
+    "unit": "mIU/mL"
+  },
+  "Prolactin": {
+    "female": [4.0, 23.0],
+    "unit": "ng/mL"
+  }
+}
