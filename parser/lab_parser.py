@@ -1,57 +1,114 @@
 import re
 
-# Known lab tests we want to extract
-KNOWN_TESTS = [
-    "HEMOGLOBIN",
-    "TOTAL LEUKOCYTE COUNT",
-    "NEUTROPHILS",
-    "LYMPHOCYTE",
-    "EOSINOPHILS",
-    "MONOCYTES",
-    "BASOPHILS",
-    "PLATELET COUNT",
-    "HEMATOCRIT",
-    "MCV",
-    "MCH",
-    "MCHC"
-]
+ALIASED_TESTS = {
+    # --- CBC ---
+    "hemoglobin": "Hemoglobin",
+    "hb": "Hemoglobin",
+    "haemoglobin": "Hemoglobin",
+    "hgb": "Hemoglobin",
+
+    "total leukocyte count": "Total Leukocyte Count",
+    "tlc": "Total Leukocyte Count",
+    "wbc": "Total Leukocyte Count",
+    "wbc count": "Total Leukocyte Count",
+
+    "rbc": "RBC Count",
+    "rbc count": "RBC Count",
+    "total rbc count": "RBC Count",
+
+    "platelet": "Platelet Count",
+    "platelet count": "Platelet Count",
+    "platelets": "Platelet Count",
+    "plt": "Platelet Count",
+
+    "hematocrit": "Hematocrit",
+    "hct": "Hematocrit",
+    "pcv": "Hematocrit",
+
+    "mcv": "MCV",
+    "mch": "MCH",
+    "mchc": "MCHC",
+
+    "neutrophils": "Neutrophils",
+    "lymphocytes": "Lymphocytes",
+    "monocytes": "Monocytes",
+    "eosinophils": "Eosinophils",
+    "basophils": "Basophils",
+
+    # --- THYROID ---
+    "thyroid stimulating hormone": "TSH",
+    "tsh": "TSH",
+
+    "triiodothyronine": "T3",
+    "t3": "T3",
+    "tt3": "T3",
+
+    "thyroxine": "T4",
+    "t4": "T4",
+    "tt4": "T4",
+
+    # --- DIABETES ---
+    "hba1c": "HbA1c",
+    "glycated hemoglobin": "HbA1c",
+
+    # --- KIDNEY ---
+    "creatinine": "Creatinine",
+    "serum creatinine": "Creatinine",
+
+    "urea": "Urea",
+    "serum urea": "Urea",
+
+    "bun": "BUN",
+
+    "sodium": "Sodium",
+    "serum sodium": "Sodium",
+
+    "potassium": "Potassium",
+    "serum potassium": "Potassium",
+
+    "uric acid": "Uric Acid",
+    "serum uric acid": "Uric Acid",
+
+    "calcium": "Calcium",
+    "calcium, total": "Calcium",
+
+    "phosphorus": "Phosphorus",
+
+    "egfr": "eGFR"
+}
+
 
 def parse_lab_values(text):
-    """
-    Extract lab test values from OCR text in a safe and reliable way.
-    """
     extracted = []
-    text_upper = text.upper()
+    text_lower = text.lower()
 
-    for test in KNOWN_TESTS:
-        # Pattern: Test name followed by optional symbols (<, >) and a number
-        pattern = rf"{test}\s*([<>]?)\s*([\d,]+\.?\d*)"
-        match = re.search(pattern, text_upper)
+    sorted_aliases = sorted(ALIASED_TESTS.keys(), key=len, reverse=True)
 
-        if not match:
-            continue
+    for alias in sorted_aliases:
+        pattern = rf"{re.escape(alias)}[\s\.\-\:]*([<>]?)\s*([\d,\.]+)"
+        match = re.search(pattern, text_lower)
 
-        symbol = match.group(1)
-        raw_value = match.group(2).replace(",", "")
+        if match:
+            standard_name = ALIASED_TESTS[alias]
+            symbol = match.group(1)
+            raw_val = match.group(2).replace(",", "").strip(".")
 
-        try:
-            value = float(raw_value)
-        except ValueError:
-            continue
+            try:
+                value = float(raw_val)
 
-        # Determine comparison type
-        if symbol == "<":
-            comparison = "less_than"
-        elif symbol == ">":
-            comparison = "greater_than"
-        else:
-            comparison = "exact"
+                extracted.append({
+                    "test": standard_name,
+                    "value": value,
+                    "comparison": (
+                        "less_than" if symbol == "<"
+                        else "greater_than" if symbol == ">"
+                        else "exact"
+                    )
+                })
 
-        extracted.append({
-            "test": test.title(),
-            "value": value,
-            "comparison": comparison,
-            "raw_match": match.group(0)
-        })
+                text_lower = text_lower.replace(match.group(0), "###", 1)
+
+            except ValueError:
+                continue
 
     return extracted
